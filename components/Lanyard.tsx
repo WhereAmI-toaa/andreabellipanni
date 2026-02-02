@@ -14,9 +14,12 @@ import { MeshLineGeometry, MeshLineMaterial } from 'meshline'
 import * as THREE from 'three'
 
 import styles from './Lanyard.module.css'
-// TODO: Replace placeholder lanyard assets with the real card.glb and lanyard.png files.
-import cardGLB from '../assets/lanyard/card.glb'
-import lanyardTexture from '../assets/lanyard/lanyard.png'
+
+const rawBasePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const trimmedBasePath = rawBasePath.replace(/^\/+/, '').replace(/\/+$/, '')
+const basePath = trimmedBasePath ? `/${trimmedBasePath}` : ''
+const cardGLB = `${basePath}/lanyard/card.glb`
+const lanyardTexture = `${basePath}/lanyard/lanyard.png`
 
 extend({ MeshLineGeometry, MeshLineMaterial })
 
@@ -123,14 +126,13 @@ function Band({
     colliders: false,
     angularDamping: 7,
     linearDamping: 7
-  }
+  } as const
   const cardScale = 2.6
   const cardOffset: [number, number, number] = [0, -3, -0.05]
   const cardAnchor: [number, number, number] = [0, 0.1, 0]
   const lanyardOrigin: [number, number, number] = [0, 4.5, 0]
   const { nodes, materials } = useGLTF(cardGLB) as any
-  const textureSource = typeof lanyardTexture === 'string' ? lanyardTexture : lanyardTexture.src
-  const texture = useTexture(textureSource) as THREE.Texture
+  const texture = useTexture(lanyardTexture) as THREE.Texture
   const [curve] = useState(
     () =>
       new THREE.CatmullRomCurve3([
@@ -205,7 +207,8 @@ function Band({
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    event.target.setPointerCapture(event.pointerId)
+    const target = event.target as HTMLElement | null
+    target?.setPointerCapture?.(event.pointerId)
     setDragStart(new THREE.Vector3().copy(event.point))
     drag(new THREE.Vector3().copy(event.point).sub(vec.copy(card.current.translation())))
   }
@@ -230,7 +233,8 @@ function Band({
   }
 
   const handlePointerUp = (event: ThreeEvent<PointerEvent>) => {
-    event.target.releasePointerCapture(event.pointerId)
+    const target = event.target as HTMLElement | null
+    target?.releasePointerCapture?.(event.pointerId)
     drag(false)
 
     if (dragStart && onSelect) {

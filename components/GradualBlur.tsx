@@ -151,7 +151,7 @@ function GradualBlur(props: GradualBlurProps) {
   const config = useMemo(() => {
     const presetConfig = props.preset && PRESETS[props.preset] ? PRESETS[props.preset] : {}
     return mergeConfigs(DEFAULT_CONFIG, presetConfig, props)
-  }, [props])
+  }, [props]) as GradualBlurConfig
 
   const responsiveHeight = useResponsiveDimension(config.responsive, config, 'height')
   const responsiveWidth = useResponsiveDimension(config.responsive, config, 'width')

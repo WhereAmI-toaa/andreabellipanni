@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH
-  ? `/${process.env.NEXT_PUBLIC_BASE_PATH.replace(/^\\/+|\\/+$/g, '')}`
-  : ''
+const rawBasePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const trimmedBasePath = rawBasePath.replace(/^\/+/, '').replace(/\/+$/, '')
+const basePath = trimmedBasePath ? `/${trimmedBasePath}` : ''
 
 const nextConfig = {
   output: 'export',

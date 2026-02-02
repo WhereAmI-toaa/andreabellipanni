@@ -1,10 +1,5 @@
 andreabellipanni.github.io/
-andreabellipanni.github.io/
-
 node_modules/
 .next/
-.DS_Store
-
-node_modules/
-.next/
+out/
 .DS_Store
