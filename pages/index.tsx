@@ -6,6 +6,7 @@ import CardSwap, { Card } from '../components/CardSwap'
 import styles from '../styles/HomePage.module.css'
 
 const Lanyard = dynamic(() => import('../components/Lanyard'), { ssr: false })
+const Dither = dynamic(() => import('../components/Dither'), { ssr: false })
 export default function Home() {
   const router = useRouter()
   const rawBasePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
@@ -18,6 +19,18 @@ export default function Home() {
 
   return (
     <main className={styles.page}>
+      <div className={styles.ditherBackground}>
+        <Dither
+          waveColor={[0.5, 0.5, 0.5]}
+          disableAnimation={false}
+          enableMouseInteraction
+          mouseRadius={0.3}
+          colorNum={4}
+          waveAmplitude={0.3}
+          waveFrequency={3}
+          waveSpeed={0.05}
+        />
+      </div>
       <div className={styles.heroCallout} aria-hidden="true" style={calloutStyle}>
         <span className={styles.heroCalloutText}>Click me</span>
         <span className={styles.heroCalloutArrow} />

@@ -9,12 +9,14 @@
   "dependencies": {
     "@react-three/drei": "latest",
     "@react-three/fiber": "latest",
+    "@react-three/postprocessing": "^3.0.4",
     "@react-three/rapier": "latest",
     "framer-motion": "latest",
     "gsap": "latest",
     "meshline": "latest",
     "next": "latest",
     "ogl": "latest",
+    "postprocessing": "^6.38.2",
     "react": "latest",
     "react-dom": "latest",
     "three": "latest"
