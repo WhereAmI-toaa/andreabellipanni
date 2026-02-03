@@ -6,8 +6,6 @@ import CardSwap, { Card } from '../components/CardSwap'
 import styles from '../styles/HomePage.module.css'
 
 const Lanyard = dynamic(() => import('../components/Lanyard'), { ssr: false })
-const LightRays = dynamic(() => import('../components/LightRays'), { ssr: false })
-
 export default function Home() {
   const router = useRouter()
   const rawBasePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
@@ -20,22 +18,6 @@ export default function Home() {
 
   return (
     <main className={styles.page}>
-      <div className={styles.pageRays}>
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#ffffff"
-          raysSpeed={0.2}
-          lightSpread={0.3}
-          rayLength={120}
-          followMouse
-          mouseInfluence={0.1}
-          noiseAmount={0}
-          distortion={0}
-          pulsating={false}
-          fadeDistance={4.4}
-          saturation={5.8}
-        />
-      </div>
       <div className={styles.heroCallout} aria-hidden="true" style={calloutStyle}>
         <span className={styles.heroCalloutText}>Click me</span>
         <span className={styles.heroCalloutArrow} />

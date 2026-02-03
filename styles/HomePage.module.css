@@ -6,13 +6,6 @@
   isolation: isolate;
 }
 
-.pageRays {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
 .hero {
   min-height: 100vh;
   position: relative;
